@@ -1,0 +1,40 @@
+{
+  "uid": "scamshield-overview",
+  "title": "ScamShield India — API Overview",
+  "tags": ["scamshield"],
+  "timezone": "Asia/Kolkata",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "time": {"from": "now-24h", "to": "now"},
+  "panels": [
+    {
+      "id": 1, "type": "timeseries", "title": "Analyses per minute",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+      "targets": [{"refId": "A", "expr": "sum(rate(scamshield_analyses_total[5m])) * 60", "legendFormat": "analyses"}]
+    },
+    {
+      "id": 2, "type": "timeseries", "title": "p95 analysis latency (s)",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+      "targets": [{"refId": "A", "expr": "histogram_quantile(0.95, sum(rate(scamshield_analysis_latency_seconds_bucket[5m])) by (le))", "legendFormat": "p95"}]
+    },
+    {
+      "id": 3, "type": "timeseries", "title": "Scams vs safe (rate/min)",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+      "targets": [{"refId": "A", "expr": "sum by (label) (rate(scamshield_analyses_total[5m])) * 60", "legendFormat": "{{label}}"}]
+    },
+    {
+      "id": 4, "type": "timeseries", "title": "LLM path + rate-limit rejections",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+      "targets": [
+        {"refId": "A", "expr": "sum by (outcome) (rate(scamshield_llm_calls_total[5m])) * 60", "legendFormat": "llm {{outcome}}"},
+        {"refId": "B", "expr": "rate(scamshield_rate_limit_hits_total[5m]) * 60", "legendFormat": "rate_limited"}
+      ]
+    },
+    {
+      "id": 5, "type": "timeseries", "title": "PII redactions (pre-storage masking)",
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 16},
+      "targets": [{"refId": "A", "expr": "sum by (kind) (rate(scamshield_pii_redactions_total[5m])) * 60", "legendFormat": "{{kind}}"}]
+    }
+  ]
+}

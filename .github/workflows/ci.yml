@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Lint & types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install ruff mypy
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: mypy scamshield/
+
+  test:
+    name: Tests (train → pytest → golden eval gate)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - name: Build dataset & train baseline model
+        run: |
+          python data/scripts/build_dataset.py
+          python -m scamshield.model --csv data/training/train.csv
+      - name: pytest with coverage
+        run: python -m pytest --cov=scamshield --cov-report=term-missing --cov-fail-under=70
+      - name: Golden-set regression gate (combined F1 must stay >= 0.90)
+        run: |
+          python evaluation/evaluate.py
+          python - << 'PY'
+          import json
+          f1 = json.load(open("models/eval_results.json"))["combined"]["scam_f1"]
+          print(f"combined scam F1 = {f1}")
+          raise SystemExit(0 if f1 >= 0.90 else 1)
+          PY
+
+  security:
+    name: Dependency audit
+    runs-on: ubuntu-latest
+    continue-on-error: true   # advisory; do not block merges, but reports appear in the log
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pip-audit
+      - run: pip-audit -r requirements.txt --desc || true
+
+  docker:
+    name: Docker build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: scamshield-india:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

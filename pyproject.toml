@@ -1,0 +1,50 @@
+[project]
+name = "scamshield-india"
+version = "1.0.0"
+description = "AI-powered detection and tracking of scam SMS/calls in India (no-card, free-tier friendly)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+src = ["."]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "S"]
+ignore = [
+  "S101",   # asserts are expected in tests
+  "B008",   # FastAPI Depends() in defaults is idiomatic
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S", "B"]
+"evaluation/**" = ["S101"]
+"data/scripts/**" = ["S311", "E501"]   # seeded RNG + long SMS corpus strings
+"scamshield/redflags.py" = ["E501"]    # readable regex library
+"automation/fetch_advisories.py" = ["E501"]  # curated advisory titles
+"locustfile.py" = ["S"]
+"scripts/seed_demo_data.py" = ["S311"]  # demo data, not crypto
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_ignores = true
+warn_redundant_casts = true
+no_implicit_optional = true
+ignore_missing_imports = true
+exclude = "(build/|dist/|\\.venv/|node_modules/)"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q --tb=short"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.coverage.run]
+source = ["scamshield"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = ["pragma: no cover", "if __name__ == .__main__.:"]

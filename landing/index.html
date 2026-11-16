@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ScamShield India — AI that catches scam messages before you do</title>
+<meta name="description" content="Forward suspicious SMS/WhatsApp messages to ScamShield. ML + LLM classifier names the scam type, scores the risk 0–100 and explains the red flags in English or Hindi — without storing your personal data." />
+<!--
+  Google Analytics 4 — replace G-XXXXXXXXXX with your Measurement ID, then deploy.
+  GA is free; no card needed. Remove this comment when wired.
+-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+<style>
+  :root {
+    --navy: #0b1526; --navy-2: #111f36; --card: #16233d;
+    --saffron: #f97316; --saffron-2: #ea580c;
+    --green: #22c55e; --text: #e7ecf5; --muted: #9fb0cd;
+    --max: 1120px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--navy); color: var(--text); line-height: 1.6; }
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+  a { color: inherit; }
+
+  nav { position: sticky; top: 0; z-index: 10; background: rgba(11,21,38,.85); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,.06); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .logo { font-weight: 800; font-size: 1.15rem; text-decoration: none; display: flex; align-items: center; gap: .5rem; }
+  .logo span.dot { color: var(--saffron); }
+  .nav-links a { margin-left: 1.5rem; text-decoration: none; color: var(--muted); font-size: .92rem; }
+  .nav-links a:hover { color: var(--text); }
+
+  .hero { padding: 4.5rem 0 3.5rem; background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(249,115,22,.18), transparent), var(--navy); }
+  .badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(249,115,22,.12); color: #fdba74; border: 1px solid rgba(249,115,22,.35); padding: .35rem .9rem; border-radius: 999px; font-size: .8rem; margin-bottom: 1.25rem; }
+  h1 { font-size: clamp(2.1rem, 5.2vw, 3.4rem); line-height: 1.12; letter-spacing: -0.02em; font-weight: 800; }
+  h1 em { font-style: normal; color: var(--saffron); }
+  .hero p.sub { margin: 1.25rem 0 1.75rem; font-size: 1.15rem; color: var(--muted); max-width: 620px; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: .85rem; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .8rem 1.5rem; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 1rem; border: none; cursor: pointer; }
+  .btn-primary { background: var(--saffron); color: #1a1207; }
+  .btn-primary:hover { background: #fb8b3d; }
+  .btn-ghost { border: 1px solid rgba(255,255,255,.18); color: var(--text); }
+  .btn-ghost:hover { border-color: rgba(255,255,255,.4); }
+  .micro { margin-top: .9rem; font-size: .82rem; color: var(--muted); }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.07); border-radius: 16px; overflow: hidden; margin: 3rem 0; }
+  .stat { background: var(--navy-2); padding: 1.1rem 1rem; text-align: center; }
+  .stat b { font-size: 1.5rem; display: block; color: #fff; }
+  .stat span { font-size: .78rem; color: var(--muted); }
+
+  section.block { padding: 3.5rem 0; }
+  h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  .card { background: var(--card); border: 1px solid rgba(255,255,255,.06); border-radius: 16px; padding: 1.5rem; }
+  .card h3 { font-size: 1.05rem; margin: .6rem 0 .4rem; }
+  .card p { font-size: .9rem; color: var(--muted); }
+  .card .num { font-size: 1.6rem; }
+
+  .step { display: flex; gap: 1rem; align-items: flex-start; background: var(--card); border-radius: 16px; padding: 1.4rem; border: 1px solid rgba(255,255,255,.06); }
+  .step .n { background: var(--saffron); color: #1a1207; font-weight: 800; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  .pii { background: #0d2818; border: 1px solid #14532d; border-radius: 16px; padding: 1.75rem; }
+  .pii h2 { color: #4ade80; }
+  .pii li { margin-left: 1.25rem; color: #d1fae5; font-size: .95rem; }
+
+  .faq details { background: var(--card); border: 1px solid rgba(255,255,255,.06); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: .75rem; }
+  .faq summary { cursor: pointer; font-weight: 600; }
+  .faq p { margin-top: .6rem; color: var(--muted); font-size: .95rem; }
+
+  .alert-strip { background: #3b2506; border-top: 1px solid #92600e; border-bottom: 1px solid #92600e; color: #fcd34d; padding: .7rem 0; font-size: .88rem; text-align: center; }
+  footer { border-top: 1px solid rgba(255,255,255,.07); padding: 2rem 0 3rem; color: var(--muted); font-size: .85rem; }
+  @media (max-width: 900px) { .grid-4, .grid-3 { grid-template-columns: 1fr 1fr; } .stats { grid-template-columns: repeat(2, 1fr); } .nav-links { display: none; } }
+  @media (max-width: 560px) { .grid-4, .grid-3 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="alert-strip">Cyber fraud हुआ? तुरंत <a href="https://www.cybercrime.gov.in" style="color:#fde68a">cybercrime.gov.in</a> पर शिकायत करें या <b>1930</b> पर कॉल करें — “golden hour” में पैसे वापस मिल सकते हैं।</div>
+
+<nav><div class="container nav-inner">
+  <a class="logo" href="#">🛡️ ScamShield <span class="dot">India</span></a>
+  <div class="nav-links">
+    <a href="#how">How it works</a><a href="#scams">Scam types</a><a href="#privacy">Privacy</a><a href="#faq">FAQ</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="container">
+  <span class="badge">🇮🇳 Built for India · 100% free to use</span>
+  <h1>AI that tells you<br /><em>“Ye scam hai.”</em></h1>
+  <p class="sub">Forward any suspicious SMS to our Telegram bot. ScamShield classifies the scam type, scores the risk 0–100 and explains the red flags — in plain English or Hindi. Your personal data never touches our servers.</p>
+  <div class="cta-row">
+    <!-- Replace with your bot's real t.me link after creating it via @BotFather -->
+    <a class="btn btn-primary" href="https://t.me/scamshield_india_bot" rel="noopener">💬 Open in Telegram</a>
+    <a class="btn btn-ghost" href="#how">See how it works →</a>
+  </div>
+  <p class="micro">No sign-up · No phone number needed · No app to install</p>
+</div></header>
+
+<main class="container">
+
+  <div class="stats" aria-label="ScamShield in numbers">
+    <div class="stat"><b>92.75%</b><span>scam precision (golden set)</span></div>
+    <div class="stat"><b>98.5%</b><span>scam recall (golden set)</span></div>
+    <div class="stat"><b>97% F1</b><span>ML + LLM combined</span></div>
+    <div class="stat"><b>&lt;10ms</b><span>avg analysis latency</span></div>
+  </div>
+
+  <section class="block" id="how">
+    <h2>3 steps. That’s it.</h2>
+    <div class="grid-3">
+      <div class="step"><div class="n">1</div><div><b>Forward the message</b><p>Any SMS/WhatsApp text — fake KYC, UPI refund, “digital arrest” call notes, job offers, lottery wins.</p></div></div>
+      <div class="step"><div class="n">2</div><div><b>AI analyses it</b><p>A scikit-learn model + an LLM cross-check the message against 13 Indian scam patterns and known red flags.</p></div></div>
+      <div class="step"><div class="n">3</div><div><b>Get a verdict</b><p>Scam or safe, the exact scam type, a 0–100 risk score, and red flags explained in your language.</p></div></div>
+    </div>
+  </section>
+
+  <section class="block" id="scams">
+    <h2>We catch the scams Indians actually see</h2>
+    <div class="grid-4">
+      <div class="card">🏦<h3>Fake KYC update</h3><p>“Your account will be blocked — update KYC now.” Banks never ask via SMS link.</p></div>
+      <div class="card">💸<h3>UPI refund traps</h3><p>“Approve the collect request to receive refund.” Approvals debit you — never credit.</p></div>
+      <div class="card">👮<h3>Digital arrest</h3><p>“CBI/police on a video call — pay now or face arrest.” A legal fiction that doesn’t exist.</p></div>
+      <div class="card">💼<h3>Fake job offers</h3><p>“₹5,000/day for liking videos.” Always ends with a “registration fee”.</p></div>
+      <div class="card">🎙️<h3>Voice-clone emergencies</h3><p>“Beta accident ho gaya — send money.” Clone-proof it: call the relative back.</p></div>
+      <div class="card">⚡<h3>Electricity disconnection</h3><p>“Power cut tonight unless you pay KYC charges.” A script, not your discom.</p></div>
+      <div class="card">📈<h3>Guaranteed returns</h3><p>“Double money in 21 days.” No SEBI advisor promises that. Ever.</p></div>
+      <div class="card">📦<h3>Fake courier fees</h3><p>“Parcel held at customs — pay ₹499.” Designed to harvest card details.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="privacy">
+    <div class="pii">
+      <h2>Your OTPs and phone numbers are not our business</h2>
+      <p style="color:#a7f3d0; margin-bottom: .75rem;">Every message passes through a scrubber <em>before</em> any AI sees it or anything is stored:</p>
+      <ul>
+        <li>Phone numbers, OTPs, Aadhaar, PAN, card numbers, UPI IDs, emails → masked (<code>[PHONE]</code>, <code>[OTP]</code>…)</li>
+        <li>Only the scrubbed text + a one-way hash are stored — a database leak exposes no PII</li>
+        <li>No raw messages are logged — ever. Not even for debugging</li>
+        <li>Open methodology: red-flag library and model are auditable in the repo</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block faq" id="faq">
+    <h2>Honest answers</h2>
+    <details open><summary>Is ScamShield a replacement for common sense?</summary><p>No. It’s a decision-support tool. Even a “safe” verdict means “no known scam patterns”, not a guarantee. When in doubt, verify via official apps and helplines.</p></details>
+    <details><summary>Will it work for Hindi messages?</summary><p>Yes — explanations come in English or Hindi (Devanagari or romanized). The model is trained on Hinglish lure patterns like “aapka account band ho jayega”.</p></details>
+    <details><summary>What does it cost?</summary><p>Users pay nothing. The project runs on free tiers and runs locally with <code>docker compose up</code> — zero spend by design.</p></details>
+    <details><summary>Can the AI be wrong?</summary><p>Yes — false positives happen (we publish them in our model card). That’s why we explain <em>why</em>: you always see the red flags, not just a score.</p></details>
+    <details><summary>How do I report a scam I saw?</summary><p>Forward it to the bot, and report it at <a href="https://www.cybercrime.gov.in" style="color:#fdba74">cybercrime.gov.in</a> or call <b>1930</b>. Both matter.</p></details>
+  </section>
+</main>
+
+<footer><div class="container">
+  <p><b>ScamShield India</b> — open-source AI scam detection. Code, model card, threat model and evaluation in the GitHub repo.</p>
+  <p style="margin-top:.5rem;">Not legal or financial advice. We never call, text or charge you. Report fraud: cybercrime.gov.in · 1930.</p>
+</div></footer>
+
+</body>
+</html>

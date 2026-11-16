@@ -1,0 +1,81 @@
+text,label,scam_type
+"Dear SBI user, your eKYC pending since 30 days. Click sbi-kyc-now.in to update else a/c closed permanently.",scam,kyc_update
+Your HDFC net banking KYC will expire tonight. Complete verification using the link below immediately.,scam,kyc_update
+आपका Paytm KYC अधूरा है। तुरंत अपडेट करें और OTP बताएं वरना वॉलेट बंद हो जाएगा।,scam,kyc_update
+RBI directive: all bank customers must re-verify KYC on this portal within 48 hrs or face suspension.,scam,kyc_update
+Axis Bank: your KYC documents rejected. Re-upload now at verify-axis-kyc.com to continue services.,scam,kyc_update
+"₹3,480 refund initiated by Amazon. To receive, open PhonePe and approve the collect request sent.",scam,upi_refund
+Your IRCTC ticket cancellation refund of Rs 380 awaits acceptance. Enter UPI PIN to credit.,scam,upi_refund
+"Bhaiya, aapka 12000 ka refund atak gaya hai. Google Pay kholo, request accept karke PIN dalo.",scam,upi_refund
+"Paytm customer care: we sent ₹1,999 cashback request, kindly approve in app to receive it.",scam,upi_refund
+"Flipkart refund team: wrong EMI amount reversed Rs 1,450. Accept the request and enter your PIN to confirm.",scam,upi_refund
+"Greetings from HR! You are selected for a work-from-home engagement. Fixed ₹9,000 per day, zero investment, pay ₹800 e-wallet registration.",scam,fake_job_offer
+"Earn from Telegram! Like 10 posts daily, ₹700 each, paid instantly to UPI. Deposit ₹400 joining amount today.",scam,fake_job_offer
+"Fresh data entry work from home, ₹35,000/month, only ₹600 refundable deposit. WhatsApp now.",scam,fake_job_offer
+"Part time digital marketing internship, stipend 28,000, but training module fee 1,500 first. Apply fast.",scam,fake_job_offer
+"Amazon is hiring home based packers, salary 45k, pay ₹999 courier kit charges to get started.",scam,fake_job_offer
+"This is officer Rao from CBI. Your mobile number is used in a money mule case. Stay on this video call and transfer ₹2,00,000 for provisional bail.",scam,digital_arrest
+ED HQ Delhi: non bailable warrant against you in hawala matter. Do not inform family. Digital verification of funds required now.,scam,digital_arrest
+"Kanpur Cyber Crime: SIM registered in your name used for illegal betting. Pay ₹60,000 to close case or get arrested today.",scam,digital_arrest
+"Narcotics Control Bureau: 5 kg consignment intercepted, your Aadhaar linked. Remain on line, follow instructions or digital arrest.",scam,digital_arrest
+Senior officer ID 8842 speaking. Your bank a/c is under scanner for fraud. Verify funds by transferring them to the secure govt account shared.,scam,digital_arrest
+"Papa phone kharab ho gaya, main road accident mein hospital mein hoon, ₹28,000 transfer karo iske number pe.",scam,voice_clone
+"Hey this is Rahul, in trouble, arrested after bar fight, lawyer wants ₹40,000 bail right now, please don't call mom.",scam,voice_clone
+Your son is in custody at Lucknow HQ. Send bail amount immediately to this officer's UPI. Do not ring his phone.,scam,voice_clone
+"Didi bol rahi hoon, accident ho gaya hai NH-28 pe, operation chalu ho gaya, paise bhejo jaldi please.",scam,voice_clone
+"Hello auntie, I am stuck at Delhi airport, passport seized, need 55,000 to settle fines before flight. Send now.",scam,voice_clone
+"Dear lucky winner, your number chosen in Jio Bumper Diwali, prize ₹40,00,000. Pay ₹7,500 courier tax to release.",scam,lottery_prize
+"KBC official: you won 1 crore. Transfer 12,000 via UPI for prize processing and notarisation.",scam,lottery_prize
+"Congratulations Sharma ji, LIC bumper draw declared you winner of ₹25 lakh! Call claims officer for release.",scam,lottery_prize
+"You won a scooty in the app scratch card! Pay ₹1,200 delivery charge to station manager.",scam,lottery_prize
+"PM Relief fund draw selected you for ₹30 lakh. Pay ₹3,000 verification fee to claim.",scam,lottery_prize
+"Guaranteed 40% monthly return in our AI algo trading, 100% SEBI safe. Invest ₹50,000 minimum, withdraw anytime.",scam,investment_scam
+"Join premium stock tips @ neofuture6, yesterday's call gave 25,000 pts. Subscription 3,000/month. 100% accurate calls.",scam,investment_scam
+"Crypto opportunity with guaranteed daily profit ₹8,000 on ₹20,000 investment. Invite only, 6 spots left.",scam,investment_scam
+"Doubling scheme! Government registered chit fund, your 1 lakh becomes 2 lakh in 90 days. Invest today only.",scam,investment_scam
+"Forex signals VIP: ₹15,000 daily income from home, deposit ₹35,000 into our managed account. Profit shared weekly.",scam,investment_scam
+"India Post: your parcel weight 2.4kg held at customs, unpaid duty ₹350. Pay at indiapost-duty.in to release.",scam,fake_delivery
+Ekart courier: shipment pending due to COD amount ₹189. Clear now at ekart-cod-pay.com else returned.,scam,fake_delivery
+"FedEx: delivery failed, your package returning to US tomorrow. Update address + pay ₹275 reshipping fee: fedex-reship.cn",scam,fake_delivery
+"Blue Dart: parcel detained, company documents incomplete. Pay ₹225 documentation charge within 24 hrs.",scam,fake_delivery
+Aramex: customs clearance required for your gift parcel from abroad. Pay ₹600 via UPI link to avoid legal case.,scam,fake_delivery
+URGENT: bijli vibhag ne aapka connection kaatne ka order diya hai aaj raat 9 bajke 25 minute mein. Abhi 9XXXX-XXXXX pe call karo.,scam,electricity_bill
+"MSEDCL final notice: outstanding ₹312, meter KYC update pending. Power cut tonight. Pay at msedcl-kyc-pay.com now.",scam,electricity_bill
+"Dear consumer, electricity will be disconnected within 2 hours for non payment of update charges. Contact 8XXXX-XXXXX urgently.",scam,electricity_bill
+"bijli ka bill ₹428 atak gaya hai, aaj raat light nahi hogi. Update fee ₹199 jama karke screenshot bhejein.",scam,electricity_bill
+KESCO: smart meter migration mandatory. Pay ₹299 connection retention fee via link else disconnection.,scam,electricity_bill
+SBI: your account has been temporarily suspended after irregular login. Reactivate immediately: sbi-unlock-a.com,scam,bank_account_block
+"Dear HDFC customer, RBI has ordered block of your a/c due to suspicious transfer of ₹85,000. Contact support now to stop.",scam,bank_account_block
+ICICI Bank: your debit card will be blocked in 5 hrs due to KYC mismatch. Verify at verify-icici.link or lose access.,scam,bank_account_block
+Your Kotak account permanently closed in 24 hours unless you confirm PAN details via the link provided.,scam,bank_account_block
+PNB security alert: password will expire tonight. Update at pnb-password-update.net to avoid netbanking loss.,scam,bank_account_block
+"UIDAI: your Aadhaar has been cancelled due to duplicate registration. Call 9XXXX-XXXXX immediately to restore, else fine ₹10,000.",scam,government_impersonation
+"Income Tax Refund: ₹32,400 approved for AY 2025-26. Share a/c number to receive. Ref IT-2026-33892.",scam,government_impersonation
+"Customs: international parcel containing gold jewellery booked in your name detained. Pay duty ₹2,40,000 now.",scam,government_impersonation
+Ministry alert: your PAN is linked to an illegal transaction. Verify at incometax-gov-verify.com within 24h.,scam,government_impersonation
+TRAI disconnection list: your number will stop working today 6 PM for spam. Call subscriber officer to appeal.,scam,government_impersonation
+"Get ₹8 lakh instant loan, no CIBIL check, no income proof, zero documents. Download Quickpaisa app now.",scam,loan_app
+"Hello, loan of ₹1.5 lakh approved for you under PM Mudra Yojana. Pay ₹999 disbursal fee UPI only.",scam,loan_app
+"Urgent ₹50,000 in 5 mins! No salary slip needed, photo and Aadhaar only. Click loan-instant-app.in",scam,loan_app
+"You are pre approved for ₹4,00,000 at 0% interest. Accept offer today. Small processing fee refundable.",scam,loan_app
+"Need money for marriage? QuickCash app gives ₹75,000 in minutes against your selfie. No paperwork ever.",scam,loan_app
+BIG SALE! Flat 80% off everything at our winter clearance. Free delivery today only. Shop now.,scam,generic_spam
+Recharge ₹199 and get 2GB/day + unlimited calls. Offer till Sunday. T&C apply.,scam,generic_spam
+Discreet delivery of medicines at unbelievable prices. Click to order now.,scam,generic_spam
+"Weekend getaway to Goa at ₹2,499 per person including stay! Limited seats.",scam,generic_spam
+Double data 5GB/day at ₹349 yearly plan. Activate by SMS YES to 56767.,scam,generic_spam
+Kal subah 7 baje gym milega? Main aa raha hoon.,safe,safe
+"Your electricity bill of ₹1,850 for October is due on 28 Nov. Pay through official discom portal.",safe,safe
+Order delivered: Amul butter 500g. Please rate your purchase.,safe,safe
+"Team lunch moved to 1 PM, canteen second floor.",safe,safe
+"Dear student, your semester fee receipt for ₹14,500 received. Keep for records.",safe,safe
+Flight 6E-204 Delhi to Lucknow on time. Gate 14. Boarding 5:10 PM.,safe,safe
+Papa ka BP checkup normal aya hai. Sab tension free rahenge.,safe,safe
+Your SBI statement is ready. Login to YONO to view. We never ask for OTP.,safe,safe
+Bhai kal match dekh rahe kya? 8 baje ghar wapas aa raha hoon.,safe,safe
+"Reminder: property tax ₹3,200 due 31 March. Pay at official municipal site.",safe,safe
+Congratulations on clearing the UPSC mains! Interview will be in January 2027.,safe,safe
+"Your Swiggy order from Sharma Chaat Bhandar is on the way, arriving in 20 mins.",safe,safe
+"Diwali party at Sharma ji's place on 26th, 7 PM onwards. Sweets le aana.",safe,safe
+Your OTP for SBI net banking login is 392811. Never share OTP with anyone.,safe,safe
+"Meeting agenda attached: Q3 review, roadmap and hiring plan.",safe,safe

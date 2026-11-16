@@ -1,0 +1,73 @@
+# Zero-cost local stack: API + dashboard + Prometheus + Grafana (+ optional AWS via LocalStack profile)
+services:
+  api:
+    build: .
+    image: scamshield-india:latest
+    ports: ["8000:8000"]
+    environment:
+      SCAMSHIELD_DB_PATH: /data/scamshield.db
+      SCAMSHIELD_ENV: local
+      SCAMSHIELD_RATE_LIMIT: "60"
+      SCAMSHIELD_LOG_LEVEL: INFO
+      # GEMINI_API_KEY: ""   # optional: enable free-tier Gemini; fallback explainer otherwise
+    volumes:
+      - scamshield-data:/data
+    restart: unless-stopped
+
+  dashboard:
+    build: .
+    image: scamshield-india:latest
+    command: ["python", "-m", "streamlit", "run", "dashboard/app.py",
+              "--server.port=8501", "--server.address=0.0.0.0",
+              "--server.headless=true", "--server.enableCORS=false",
+              "--server.enableXsrfProtection=false"]
+    ports: ["8501:8501"]
+    environment:
+      SCAMSHIELD_DB_PATH: /data/scamshield.db
+    volumes:
+      - scamshield-data:/data
+    depends_on: [api]
+    restart: unless-stopped
+
+  # one-off demo data seeder: docker compose --profile demo run --rm seed
+  seed:
+    build: .
+    image: scamshield-india:latest
+    profiles: ["demo"]
+    command: ["python", "scripts/seed_demo_data.py", "--n", "420"]
+    environment:
+      SCAMSHIELD_DB_PATH: /data/scamshield.db
+    volumes:
+      - scamshield-data:/data
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    ports: ["9090:9090"]
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on: [api]
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:11.1.4
+    ports: ["3000:3000"]
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: scamshield   # local demo only; change for anything real
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+    depends_on: [prometheus]
+    restart: unless-stopped
+
+  # optional: AWS API surface locally, no card, no spend
+  localstack:
+    image: localstack/localstack:3.5
+    profiles: ["aws"]
+    ports: ["4566:4566"]
+    environment:
+      SERVICES: s3,dynamodb,lambda,apigateway
+      DEBUG: "0"
+    restart: unless-stopped
+
+volumes:
+  scamshield-data:
