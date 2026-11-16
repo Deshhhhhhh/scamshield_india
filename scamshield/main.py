@@ -15,7 +15,7 @@ import uuid
 from collections import defaultdict, deque
 from collections.abc import Awaitable, Callable
 
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.responses import Response as RawResponse
@@ -135,10 +135,7 @@ def create_app() -> FastAPI:
         ok = storage.add_feedback(settings.db_path, req.analysis_id, req.correct, req.actual_label, req.note)
         FEEDBACK_TOTAL.labels(correct=str(req.correct).lower()).inc()
         if not ok:
-            return JSONResponse(  # type: ignore[return-value]
-                {"error": "not_found", "detail": "analysis_id not found"},
-                status_code=404,
-            )
+            raise HTTPException(status_code=404, detail="analysis_id not found")
         return FeedbackResponse(status="recorded")
 
     @app.get("/v1/stats", tags=["analytics"])
