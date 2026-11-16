@@ -4,4 +4,4 @@ pytest-cov>=5.0
 ruff>=0.6
 mypy>=1.11
 pip-audit>=2.7
-locust>=2.32
+locust>=2.47.0
