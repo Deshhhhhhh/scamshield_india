@@ -1,11 +1,11 @@
 # ---------- build stage: wheelhouse ----------
-FROM python:3.13-slim AS build
+FROM python:3.15-slim AS build
 WORKDIR /wheels
 COPY requirements.txt .
 RUN pip wheel --no-cache-dir --wheel-dir /wheels -r requirements.txt
 
 # ---------- runtime stage ----------
-FROM python:3.13-slim
+FROM python:3.15-slim
 ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
 
 RUN groupadd -r scamshield && useradd -r -g scamshield -u 10001 scamshield
