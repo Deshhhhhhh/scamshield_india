@@ -10,26 +10,26 @@ from __future__ import annotations
 import csv
 import json
 import re
+import sys
 import time
 from pathlib import Path
-import sys
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # repo root
 
-import joblib
-from sklearn.metrics import (
+import joblib  # noqa: E402
+from sklearn.metrics import (  # noqa: E402
     accuracy_score,
     confusion_matrix,
     precision_recall_fscore_support,
 )
 
-from scamshield import MODEL_VERSION, PROMPT_VERSION
-from scamshield.categories import type_labels
-from scamshield.llm import FallbackExplainer
-from scamshield.model import predict
-from scamshield.privacy import scrub_text
-from scamshield.redflags import find_red_flags
-from scamshield.risk import combine
+from scamshield import MODEL_VERSION, PROMPT_VERSION  # noqa: E402
+from scamshield.categories import type_labels  # noqa: E402
+from scamshield.llm import FallbackExplainer  # noqa: E402
+from scamshield.model import predict  # noqa: E402
+from scamshield.privacy import scrub_text  # noqa: E402
+from scamshield.redflags import find_red_flags  # noqa: E402
+from scamshield.risk import combine  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 GOLDEN = ROOT / "data" / "golden" / "golden_set.csv"

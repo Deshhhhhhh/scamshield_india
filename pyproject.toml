@@ -20,7 +20,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["S", "B"]
-"evaluation/**" = ["S101"]
+"evaluation/**" = ["S101", "E402"]
 "data/scripts/**" = ["S311", "E501"]   # seeded RNG + long SMS corpus strings
 "scamshield/redflags.py" = ["E501"]    # readable regex library
 "automation/fetch_advisories.py" = ["E501"]  # curated advisory titles

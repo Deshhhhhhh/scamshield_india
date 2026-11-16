@@ -22,8 +22,12 @@ def lambda_handler(event, context):
     if table:
         try:
             boto3.resource("dynamodb").Table(table).put_item(
-                Item={"id": f"stub-{int(time.time())}", "pk": "health", 
-                      "created_at": str(int(time.time())), "expires_at": int(time.time()) + 3600}
+                Item={
+                    "id": f"stub-{int(time.time())}",
+                    "pk": "health",
+                    "created_at": str(int(time.time())),
+                    "expires_at": int(time.time()) + 3600,
+                }
             )
             result["dynamodb"] = "ok"
         except Exception as exc:  # noqa: BLE001
@@ -31,8 +35,10 @@ def lambda_handler(event, context):
     if bucket:
         try:
             boto3.client("s3").put_object(
-                Bucket=bucket, Key=f"health/{int(time.time())}.json",
-                Body=json.dumps(result).encode(), ContentType="application/json",
+                Bucket=bucket,
+                Key=f"health/{int(time.time())}.json",
+                Body=json.dumps(result).encode(),
+                ContentType="application/json",
             )
             result["s3"] = "ok"
         except Exception as exc:  # noqa: BLE001

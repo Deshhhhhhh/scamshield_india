@@ -12,7 +12,6 @@ data/scamshield.db
 data/raw/
 tests/
 docs/
-landing/
 *.md
 !README.md
 .DS_Store
